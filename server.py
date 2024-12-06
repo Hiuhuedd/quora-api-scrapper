@@ -1,22 +1,17 @@
 #!/usr/bin/env python
 from flask import Flask, jsonify, request
-from flask.ext.cache import Cache
+from flask_caching import Cache  # Correct import
 from quora import Quora, Activity
 import logging
 from logging import StreamHandler
 
+# Initialize Cache with the correct config
 cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 app = Flask(__name__)
 cache.init_app(app)
 
-file_handler = StreamHandler()
-app.logger.setLevel(logging.DEBUG)
-app.logger.addHandler(file_handler)
-
-# log to stderr
-import logging
-from logging import StreamHandler
+# Set up logging
 file_handler = StreamHandler()
 app.logger.setLevel(logging.DEBUG)
 app.logger.addHandler(file_handler)
